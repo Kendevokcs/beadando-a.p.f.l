@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your Simple To-Do List</title>
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Firebase SDK-k-->
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+</head>
+<body>
+
+  <!-- navigacios mezo es auth -->
+  <header class="top-nav">
+    <div class="logo">My Tasks</div>
+    <div class="auth-bar">
+      <!-- logged out div -->
+      <div id="logged-out-view">
+        <button id="btn-open-login" class="btn btn-outline">Log In</button>
+        <button id="btn-open-signup" class="btn btn-primary">Sign Up</button>
+      </div>
+
+      <!-- logged in div -->
+      <div id="logged-in-view" class="hidden">
+        <span id="user-display" class="user-badge">user@example.com</span>
+        <button id="btn-logout" class="btn btn-outline">Log Out</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- main content-->
+  <main class="main-wrapper">
+    <section class="todo-card">
+      <header class="todo-header">
+        <h1 class="todo-title">To-Do List</h1>
+        <p class="todo-subtitle">Stay organized and get things done quickly.</p>
+      </header>
+
+      <!-- task input -->
+      <form id="todo-form" class="todo-form">
+        <input 
+          type="text" 
+          id="todo-input" 
+          placeholder="Type your task here" 
+          autocomplete="off" 
+          required 
+        />
+        <button type="submit" class="btn btn-primary">Add Task</button>
+      </form>
+
+      <!-- task list cont. -->
+      <div id="todo-status-message" class="status-msg">Loading tasks...</div>
+      <ul id="todo-list" class="todo-list"></ul>
+
+      <!-- footer info actions -->
+      <footer id="todo-footer" class="todo-footer hidden">
+        <span id="items-left">0 items left</span>
+        <button id="btn-clear-completed" class="btn-text">Clear Completed</button>
+      </footer>
+    </section>
+  </main>
+
+  <!-- auth (sign in / register) -->
+  <div id="auth-modal" class="modal-backdrop hidden">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h2 id="modal-title">Log In</h2>
+        <button id="btn-close-modal" class="modal-close" aria-label="Close modal">&times;</button>
+      </div>
+
+      <div class="modal-tabs">
+        <button id="tab-login" class="tab-btn active">Log In</button>
+        <button id="tab-signup" class="tab-btn">Sign Up</button>
+      </div>
+
+      <div id="auth-error" class="auth-error hidden"></div>
+
+      <form id="auth-form" class="modal-form">
+        <div class="form-group">
+          <label for="auth-email">Email Address</label>
+          <input type="email" id="auth-email" placeholder="name@example.com" required />
+        </div>
+
+        <div class="form-group">
+          <label for="auth-password">Password</label>
+          <input type="password" id="auth-password" placeholder="At least 7 characters" minlength="7" required />
+        </div>
+
+        <button type="submit" id="auth-submit-btn" class="btn btn-primary btn-block">Log In</button>
+      </form>
+
+      <div class="modal-divider"><span>or</span></div>
+
+      <button id="btn-guest-login" class="btn btn-outline btn-block">Continue as Guest</button>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
