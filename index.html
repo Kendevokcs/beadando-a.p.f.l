@@ -49,8 +49,19 @@
           required 
         />
         <button type="submit" class="btn btn-primary">Add Task</button>
-      </form>
 
+         <!-- select task color -->
+      <div class="color-picker-row">
+          <span class="color-picker-label">Color:</span>
+          <div class="color-options" id="create-color-options">
+            <button type="button" class="color-btn color-none active" data-color="default" title="Default (White)"></button>
+            <button type="button" class="color-btn color-blue" data-color="blue" title="Light Blue"></button>
+            <button type="button" class="color-btn color-green" data-color="green" title="Light Green"></button>
+            <button type="button" class="color-btn color-red" data-color="red" title="Light Red"></button>
+            <button type="button" class="color-btn color-yellow" data-color="yellow" title="Light Yellow"></button>
+          </div>
+        </div>
+      </form>
       <!-- task list cont. -->
       <div id="todo-status-message" class="status-msg">Loading tasks...</div>
       <ul id="todo-list" class="todo-list"></ul>
