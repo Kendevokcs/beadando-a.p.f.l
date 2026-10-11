@@ -4,12 +4,13 @@
 
 
 const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_PROJECT_ID.appspot.com",
-  messagingSenderId: "YOUR_SENDER_ID",
-  appId: "YOUR_APP_ID"
+  apiKey: "AIzaSyC7fMGHjNsg8RwQ_b60K00YRfn3QudgJqc",
+  authDomain: "beadando-apfl.firebaseapp.com",
+  projectId: "beadando-apfl",
+  storageBucket: "beadando-apfl.firebasestorage.app",
+  messagingSenderId: "703398267373",
+  appId: "1:703398267373:web:06635b9b1042ff8dbd3fe4",
+  measurementId: "G-CBM66TM8J1"
 };
 
 // firebase initialization
