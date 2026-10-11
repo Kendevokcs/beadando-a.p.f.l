@@ -226,7 +226,7 @@ function renderTasks(todos) {
   todoList.innerHTML = "";
 
   if (todos.length === 0) {
-    todoStatusMessage.textContent = currentUser ? "No tasks yet. Add one above!" : "Please log in to save your tasks.";
+    todoStatusMessage.textContent = currentUser ? "No tasks yet." : "Please log in to save your tasks.";
     todoStatusMessage.classList.remove("hidden");
     todoFooter.classList.add("hidden");
     return;
@@ -241,8 +241,11 @@ function renderTasks(todos) {
     if (!todo.completed) activeCount++;
 
     const li = document.createElement("li");
-    li.className = `todo-item ${todo.completed ? "completed" : ""}`;
+    // apply color present
+    const colorClass = todo.color && todo.color !== "default" ? `theme-${todo.color}` : "";
+    li.className = `todo-item ${todo.completed ? "completed" : ""} ${colorClass}`.trim();
 
+    // leftside
     const left = document.createElement("div");
     left.className = "todo-left";
 
@@ -258,14 +261,34 @@ function renderTasks(todos) {
     left.appendChild(checkbox);
     left.appendChild(span);
 
+    // right side
+    const right = document.createElement("div");
+    right.className = "todo-right";
+
+    const inlinePicker = document.createElement("div");
+    inlinePicker.className = "inline-color-picker";
+
+    const colors = ["default", "blue", "green", "red", "yellow"];
+    colors.forEach((c) => {
+      const dot = document.createElement("button");
+      dot.className = `inline-color-dot color-${c === "default" ? "none" : c}`;
+      dot.title = `Change to ${c}`;
+      dot.type = "button";
+      dot.addEventListener("click", () => updateTodoColor(todo.id, c));
+      inlinePicker.appendChild(dot);
+    });
+
     const deleteBtn = document.createElement("button");
     deleteBtn.className = "btn-delete";
     deleteBtn.innerHTML = "&times;";
     deleteBtn.title = "Delete task";
     deleteBtn.addEventListener("click", () => deleteTodo(todo.id));
 
+    right.appendChild(inlinePicker);
+    right.appendChild(deleteBtn);
+
     li.appendChild(left);
-    li.appendChild(deleteBtn);
+    li.appendChild(right);
     todoList.appendChild(li);
   });
 
@@ -289,6 +312,16 @@ async function deleteTodo(id) {
     await getTodosRef(currentUser.uid).doc(id).delete();
   } catch (err) {
     console.error("Error deleting task:", err);
+  }
+}
+
+// update exist. task color
+async function updateTodoColor(id, color) {
+  if (!currentUser) return;
+  try {
+    await getTodosRef(currentUser.uid).doc(id).update({ color });
+  } catch (err) {
+    console.error("Error updating task color:", err);
   }
 }
 
