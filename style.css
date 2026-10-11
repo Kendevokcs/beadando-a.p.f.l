@@ -1,5 +1,13 @@
-/* --- Reset & Base Variables --- */
+/* --- reset and base variables --- */
 :root {
+  --task-blue-bg: #e0f2fe;
+  --task-blue-border: #bae6fd;
+  --task-green-bg: #dcfce7;
+  --task-green-border: #bbf7d0;
+  --task-red-bg: #fee2e2;
+  --task-red-border: #fecaca;
+  --task-yellow-bg: #fef9c3;
+  --task-yellow-border: #fef08a;
   --bg-page: #f8fafc;
   --bg-card: #ffffff;
   --text-primary: #0f172a;
@@ -104,8 +112,14 @@ body {
 /* form and inputs */
 .todo-form {
   display: flex;
+  flex-direction: column;
   gap: 8px;
   margin-bottom: 20px;
+}
+
+.input-row {
+  display: flex;
+  gap: 8px;
 }
 
 .todo-form input[type="text"] {
@@ -366,6 +380,99 @@ body {
 
 .modal-divider span {
   padding: 0 10px;
+}
+
+/* color picker button styles */
+.color-picker-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.color-options {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.color-btn {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+  outline: none;
+  transition: transform 0.15s ease, border-color 0.15s ease;
+}
+
+.color-btn:hover {
+  transform: scale(1.15);
+}
+
+.color-btn.active {
+  border-color: #334155;
+  transform: scale(1.2);
+}
+
+.color-none { background-color: #ffffff; border: 1.5px solid #cbd5e1; }
+.color-blue { background-color: var(--task-blue-bg); border: 1.5px solid var(--task-blue-border); }
+.color-green { background-color: var(--task-green-bg); border: 1.5px solid var(--task-green-border); }
+.color-red { background-color: var(--task-red-bg); border: 1.5px solid var(--task-red-border); }
+.color-yellow { background-color: var(--task-yellow-bg); border: 1.5px solid var(--task-yellow-border); }
+
+/* task color themes */
+.todo-item.theme-blue {
+  background-color: var(--task-blue-bg);
+  border-color: var(--task-blue-border);
+}
+
+.todo-item.theme-green {
+  background-color: var(--task-green-bg);
+  border-color: var(--task-green-border);
+}
+
+.todo-item.theme-red {
+  background-color: var(--task-red-bg);
+  border-color: var(--task-red-border);
+}
+
+.todo-item.theme-yellow {
+  background-color: var(--task-yellow-bg);
+  border-color: var(--task-yellow-border);
+}
+
+/* color picker inline */
+.todo-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.inline-color-picker {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.todo-item:hover .inline-color-picker {
+  opacity: 1;
+}
+
+.inline-color-dot {
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  border: 1px solid rgba(0,0,0,0.15);
+  cursor: pointer;
+  padding: 0;
+}
+
+.inline-color-dot:hover {
+  transform: scale(1.25);
 }
 
 /* help */
