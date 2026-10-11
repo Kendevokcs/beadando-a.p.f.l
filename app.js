@@ -22,6 +22,11 @@ let currentUser = null;
 let unsubscribeTodos = null;
 let currentAuthMode = "login"; // 'login' or 'signup'
 
+// color
+let selectedColor = "default";
+const createColorOptions = document.getElementById("create-color-options");
+
+
 // DOM elements
 const loggedOutView = document.getElementById("logged-out-view");
 const loggedInView = document.getElementById("logged-in-view");
@@ -111,12 +116,12 @@ btnCloseModal.addEventListener("click", closeModal);
 tabLogin.addEventListener("click", () => setAuthMode("login"));
 tabSignup.addEventListener("click", () => setAuthMode("signup"));
 
-// Close modal if background overlay clicked
+// close modal if background overlay clicked
 authModal.addEventListener("click", (e) => {
   if (e.target === authModal) closeModal();
 });
 
-// handle email and password form submission
+// handle email and password
 authForm.addEventListener("submit", async (e) => {
   e.preventDefault();
   authError.classList.add("hidden");
@@ -198,6 +203,7 @@ todoForm.addEventListener("submit", async (e) => {
     await getTodosRef(currentUser.uid).add({
       text: text,
       completed: false,
+      color: selectedColor,
       createdAt: firebase.firestore.FieldValue.serverTimestamp()
     });
     todoInput.value = "";
@@ -206,7 +212,15 @@ todoForm.addEventListener("submit", async (e) => {
     alert("Could not save task. Please try again.");
   }
 });
+// color
+createColorOptions.addEventListener("click", (e) => {
+  const btn = e.target.closest(".color-btn");
+  if (!btn) return;
 
+  createColorOptions.querySelectorAll(".color-btn").forEach((b) => b.classList.remove("active"));
+  btn.classList.add("active");
+  selectedColor = btn.dataset.color || "default";
+});
 // render ui elements
 function renderTasks(todos) {
   todoList.innerHTML = "";
