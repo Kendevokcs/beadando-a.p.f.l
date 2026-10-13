@@ -197,6 +197,9 @@ todoForm.addEventListener("submit", async (e) => {
     return;
   }
 
+  todoInput.value = ""; 
+  todoInput.focus() //cursor jumps back
+
   try {
     await getTodosRef(currentUser.uid).add({
       text: text,
