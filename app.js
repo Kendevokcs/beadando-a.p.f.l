@@ -1,6 +1,3 @@
-// fireplace conf:
- //Replace these placeholder values with your real Firebase Project credentials 
- //from Firebase Console (Project Settings -> General -> Your apps -> Web app).
 
 
 const firebaseConfig = {
